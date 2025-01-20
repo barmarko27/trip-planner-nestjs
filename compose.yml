@@ -1,0 +1,24 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trip-planner-nestjs
+    tty: true
+    volumes:
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    networks:
+      - trip-planner-nestjs-network
+
+networks:
+  trip-planner-nestjs-network:
+
+# Volume for node_modules
+volumes:
+  node_modules:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./node_modules
