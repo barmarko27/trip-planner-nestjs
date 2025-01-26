@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -16,6 +17,16 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
-  }
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@shared/application": ["src/shared/application/index"],
+      "@shared/domain": ["src/shared/domain/index"],
+      "@shared/infrastructure": ["src/shared/infrastructure/index"],
+      "@trip-planner/domain": ["src/trip-planner/domain/index"],
+      "@trip-planner/infrastructure": ["src/trip-planner/infrastructure/index"],
+      "@trip-planner/misc": ["src/trip-planner/misc/index"]
+    }
+  },
+  "include": ["./src"]
 }
