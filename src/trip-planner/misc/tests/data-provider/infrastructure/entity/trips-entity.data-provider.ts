@@ -2,7 +2,7 @@ import { CitiesEntityDataProvider } from './cities-entity.data-provider';
 import { TripTypesEnum } from '../../../../../constants/enum';
 import { TripsInformationEntityDataProvider } from './trips-information-entity.data-provider';
 import { faker } from '@faker-js/faker';
-import { Trips } from '../../../../../infrastructure/entity/trips.entity';
+import { Trips } from '@trip-planner/infrastructure';
 
 export class TripsEntityDataProvider {
   static generate() {

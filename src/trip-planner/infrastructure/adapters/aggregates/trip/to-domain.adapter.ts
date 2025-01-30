@@ -10,14 +10,14 @@ import {
   TripTypeValueObject,
 } from '@trip-planner/domain';
 import { InfraAdapter, ToDomain } from '@shared/infrastructure';
-import { Trips } from '../../entity/trips.entity';
+import { Trips } from '@trip-planner/infrastructure';
 
 export class ToDomainAdapter
   implements InfraAdapter<ToDomain<Trips, TripAggregateRoot>>
 {
   static adapt(trip: Trips): TripAggregateRoot {
     return TripAggregateRoot.create({
-      uuid: trip.id ? TripIdValueObject.create(trip.id) : undefined,
+      uuid: TripIdValueObject.create(trip.id),
       origin: CityEntity.create({
         iataCode: IataCodeValueObject.create(trip.origin.iataCodes[0].code),
       }),

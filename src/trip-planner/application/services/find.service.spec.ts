@@ -1,18 +1,16 @@
-import { FindTripService } from './find-trip.service';
 import { TripAggregateRoot, TripRepository } from '@trip-planner/domain';
-import { SortTripByEnum } from '../constants/enum';
-import { FromDomainAdapter } from '../adapters/search-trips/from-domain.adapter';
+import { FromDomainAdapter } from '../adapters/trip/from-domain.adapter';
 import { TripsDto } from '../dtos/trips.dto';
-import { RequestDto } from '../dtos/find-by-destination-origin/request.dto';
-import { randomIataCode, TripAggregateDataProvider } from '@trip-planner/misc';
-import { faker } from '@faker-js/faker';
+import { RequestDto } from '../dtos/find/request.dto';
+import { TripAggregateDataProvider } from '@trip-planner/misc';
+import { FindService } from './find.service';
 
 const transformTripAggregateToDto = (trip: TripAggregateRoot) => {
   return FromDomainAdapter.adapt(trip);
 };
 
 describe('FindTripService', () => {
-  let findTripService: FindTripService;
+  let findTripService: FindService;
   let tripRepository: TripRepository;
   let trips: TripAggregateRoot[];
   let results: TripsDto[];
@@ -21,17 +19,16 @@ describe('FindTripService', () => {
     trips = Array.from({ length: 10 }).map(TripAggregateDataProvider.generate);
     results = trips.map(transformTripAggregateToDto);
     tripRepository = {
-      search: jest.fn().mockResolvedValue(trips),
+      find: jest.fn().mockResolvedValue(trips),
     } as any;
 
-    findTripService = new FindTripService(tripRepository);
+    findTripService = new FindService(tripRepository);
   });
 
-  test('should find a trip', async () => {
+  test('should find trips', async () => {
     const tripDto = new RequestDto();
-    tripDto.destination = randomIataCode();
-    tripDto.origin = randomIataCode();
-    tripDto.sort = faker.helpers.enumValue(SortTripByEnum);
+    tripDto.page = 1;
+    tripDto.limit = 10;
     const foundTrip = await findTripService.execute(tripDto);
     expect(foundTrip).toStrictEqual(results);
     expect(foundTrip).toHaveLength(trips.length);

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { TripsInformation } from '../../../../../infrastructure/entity/trips-information.entity';
+import { TripsInformation } from '@trip-planner/infrastructure';
 
 export class TripsInformationEntityDataProvider {
   static generate(): TripsInformation {

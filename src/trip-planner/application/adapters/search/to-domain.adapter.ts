@@ -4,7 +4,7 @@ import {
   SearchTripAggregateRoot,
 } from '@trip-planner/domain';
 import { ApplicationAdapter, ToDomain } from '@shared/application';
-import { RequestDto } from '../../dtos/find-by-destination-origin/request.dto';
+import { RequestDto } from '../../dtos/search';
 
 export class ToDomainAdapter
   implements ApplicationAdapter<ToDomain<RequestDto, SearchTripAggregateRoot>>

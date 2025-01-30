@@ -1,7 +1,7 @@
 import { AggregateRoot } from '@shared/domain';
 import { Trip } from './trip';
-import { TripSearchedEvent } from '../events/trip-searched.event';
-import { CityEntity } from '../entities/city.entity';
+import { TripSearchedEvent } from '../events';
+import { CityEntity } from '../entities';
 import { SameRouteException } from '../exception/same-route.exception';
 
 export type SearchTripAggregateProps = Pick<Trip, 'origin' | 'destination'> &

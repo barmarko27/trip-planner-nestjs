@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { SearchTripBuilder, TripRepository } from '@trip-planner/domain';
-import { ToDomainAdapter } from '../adapters/search-trips/to-domain.adapter';
-import { FromDomainAdapter } from '../adapters/search-trips/from-domain.adapter';
-import { RequestDto } from '../dtos/find-by-destination-origin/request.dto';
+import { ToDomainAdapter } from '../adapters/search/to-domain.adapter';
+import { FromDomainAdapter } from '../adapters/trip/from-domain.adapter';
+import { RequestDto } from '../dtos/search';
 import { TripsDto } from '../dtos/trips.dto';
 
 @Injectable()
-export class FindTripService {
+export class SearchService {
   constructor(
     @Inject('TripRepository') private readonly tripRepository: TripRepository,
   ) {}

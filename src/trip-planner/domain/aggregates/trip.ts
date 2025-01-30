@@ -8,7 +8,7 @@ import {
 } from '@trip-planner/domain';
 
 export interface Trip {
-  uuid?: TripIdValueObject;
+  uuid: TripIdValueObject;
   origin: CityEntity;
   destination: CityEntity;
   duration: TripDurationValueObject;

@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { ErrorDto } from '../dtos/error.dto';
 import { ApiResponseOptions } from '@nestjs/swagger';
 import { ApiResponseCommonMetadata } from '@nestjs/swagger/dist/decorators/api-response.decorator';
@@ -15,7 +15,7 @@ export const buildFailRestResponse = (
   const koResponse: ApiResponseCommonMetadata = {
     description: ko.description,
     type: ErrorDto,
-    status: 400,
+    status: HttpStatus.BAD_REQUEST,
   };
   return koResponse as ApiResponseOptions;
 };

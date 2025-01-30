@@ -1,6 +1,6 @@
-import { Iata } from '../../../../../infrastructure/entity/iata.entity';
 import { faker } from '@faker-js/faker';
 import { randomIataCode } from '../../utils';
+import { Iata } from '@trip-planner/infrastructure';
 
 export class IataEntityDataProvider {
   static generate(): Iata {

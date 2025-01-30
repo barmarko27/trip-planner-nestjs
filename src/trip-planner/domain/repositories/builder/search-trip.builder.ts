@@ -1,4 +1,4 @@
 import { QueryBuilder } from '@shared/domain';
-import { SearchTripAggregateProps } from '../../aggregates/search-trip.aggregate-root';
+import { SearchTripAggregateProps } from '../../aggregates';
 
 export class SearchTripBuilder extends QueryBuilder<SearchTripAggregateProps> {}

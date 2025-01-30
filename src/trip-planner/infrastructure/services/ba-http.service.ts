@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom, map, tap } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { TripsModel } from '../models/trips.model';
-import { ToDomainAdapter } from '../adapters/trips/to-domain.adapter';
-import { SearchTripBuilder, TripAggregateRoot } from '@trip-planner/domain';
+import { SearchTripBuilder } from '@trip-planner/domain';
 import { ToBaHttpRequestBuilder } from '../adapters/builder/to-ba-http-request.builder';
 import { ConfigService } from '@nestjs/config';
-import { ToInfraAdapter } from '../adapters/trips/to-infra.adapter';
-import { Trips } from '../entity/trips.entity';
+import { Trips } from '@trip-planner/infrastructure';
+import { ToInfraAdapter } from '../adapters/models/trip/to-infra.adapter';
 
 @Injectable()
 export class BaHttpService {
@@ -16,12 +15,15 @@ export class BaHttpService {
     private configService: ConfigService,
   ) {}
 
-  async searchTrips(criteria: SearchTripBuilder): Promise<TripAggregateRoot[]> {
+  async searchTrips(criteria: SearchTripBuilder): Promise<Trips[]> {
+    // Build the full endpoint
     const endpoint = this.buildFullEndpoint('/default/trips');
+    // Get the headers
     const headers = this.getHeaders();
+    // Convert the criteria to the query params
     const params = ToBaHttpRequestBuilder.toParams(criteria);
     // Convert the response to the infrastructure model
-    const trips: Trips[] = await firstValueFrom(
+    return firstValueFrom(
       this.httpService
         .get(endpoint, { headers, params })
         .pipe(
@@ -30,8 +32,6 @@ export class BaHttpService {
           ),
         ),
     );
-    // Convert the infrastructure model to the domain model
-    return trips.map((trip) => ToDomainAdapter.adapt(trip));
   }
 
   private getHeaders() {

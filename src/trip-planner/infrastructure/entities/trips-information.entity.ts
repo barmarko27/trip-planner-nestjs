@@ -2,10 +2,10 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class TripsInformation {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column()
   shortDescription: string;
-  @Column()
+  @Column({ nullable: true })
   lang: string;
 }

@@ -1,7 +1,5 @@
-import { TripsModel } from '../../models/trips.model';
-import { Trips } from '../../entity/trips.entity';
-import { Cities } from '../../entity/cities.entity';
-import { TripsInformation } from '../../entity/trips-information.entity';
+import { Cities, Trips, TripsInformation } from '@trip-planner/infrastructure';
+import { TripsModel } from '../../../models/trips.model';
 
 export class ToInfraAdapter {
   static adapt(tripModel: TripsModel): Trips {

@@ -1,17 +1,17 @@
 import { HttpService } from '@nestjs/axios';
 import { BaHttpService } from './ba-http.service';
 import { ConfigModule } from '@nestjs/config';
-import { SearchTripBuilder, TripAggregateRoot } from '@trip-planner/domain';
-import { ToDomainAdapter } from '../adapters/trips/to-domain.adapter';
+import { SearchTripBuilder } from '@trip-planner/domain';
 import { faker } from '@faker-js/faker';
 import { of } from 'rxjs';
 import { TripsModelDataProvider } from '@trip-planner/misc';
-import { ToInfraAdapter } from '../adapters/trips/to-infra.adapter';
 import { Test } from '@nestjs/testing';
+import { ToInfraAdapter } from '../adapters/models/trip/to-infra.adapter';
+import { Trips } from '@trip-planner/infrastructure';
 
 describe('BaHttpService', () => {
   let baHttpService: BaHttpService;
-  let expectedData: TripAggregateRoot[];
+  let expectedData: Trips[];
 
   beforeEach(async () => {
     const responseData = Array.from(
@@ -39,9 +39,7 @@ describe('BaHttpService', () => {
     }).compile();
 
     baHttpService = moduleRef.get(BaHttpService);
-    expectedData = responseData.map((trip) =>
-      ToDomainAdapter.adapt(ToInfraAdapter.adapt(trip)),
-    );
+    expectedData = responseData.map((trip) => ToInfraAdapter.adapt(trip));
   });
 
   test('should create a BaHttpService instance', () => {

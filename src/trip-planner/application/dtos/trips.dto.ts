@@ -21,7 +21,7 @@ export class TripsDto {
   @ApiProperty()
   public cost: number;
 
-  @ApiProperty()
+  @ApiProperty({ enum: TripTypesEnum })
   @IsEnum(TripTypesEnum)
   public type: string;
 

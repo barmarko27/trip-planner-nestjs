@@ -1,6 +1,6 @@
 import { AggregateRoot } from '@shared/domain';
 import { Trip } from './trip';
-import { TripCreatedEvent } from '../events';
+import { TripLoadedEvent } from '../events';
 import {
   TripCostValueObject,
   TripDurationValueObject,
@@ -22,13 +22,11 @@ export class TripAggregateRoot extends AggregateRoot<TripAggregateRootProps> {
    */
   static create(props: TripAggregateRootProps): TripAggregateRoot {
     const trip = new TripAggregateRoot(props);
-    if (trip.uuid) {
-      trip.addDomainEvent(new TripCreatedEvent(trip));
-    }
+    trip.addDomainEvent(new TripLoadedEvent(trip));
     return trip;
   }
 
-  get uuid(): TripIdValueObject | undefined {
+  get uuid(): TripIdValueObject {
     return this.props.uuid;
   }
 

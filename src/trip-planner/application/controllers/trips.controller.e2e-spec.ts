@@ -2,7 +2,7 @@ import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { TripPlannerModule } from '../../trip-planner.module';
-import { FindTripService } from '../services/find-trip.service';
+import { SearchService } from '../services/search.service';
 
 describe('Trips', () => {
   let app: INestApplication;
@@ -14,7 +14,7 @@ describe('Trips', () => {
     const moduleRef = await Test.createTestingModule({
       imports: [TripPlannerModule],
     })
-      .overrideProvider(FindTripService)
+      .overrideProvider(SearchService)
       .useValue(findTripService)
       .compile();
 
