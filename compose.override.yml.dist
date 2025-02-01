@@ -1,0 +1,9 @@
+services:
+  api:
+    build:
+      target: development
+    ports:
+      - 3039:3000
+      - 9235:9229
+    expose:
+      - 3039
